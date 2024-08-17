@@ -1,10 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-    <React.StrictMode>
-        <h1>Fitness Tracker App</h1>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni, quaerat?</p>
-    </React.StrictMode>
-)
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
