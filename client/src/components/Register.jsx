@@ -22,8 +22,8 @@ const Register = () => {
   return (
     <Container>
         <div>
-            <Title>Welcome to AfyaFit!👋</Title>
-            <Span>Please enter your login details here</Span>
+            <Title>Create New Account</Title>
+            <Span>Please enter your details here to create new account</Span>
         </div>
         <div style={{
             display: "flex",
@@ -31,7 +31,7 @@ const Register = () => {
             flexDirection: "column",
         }}
         >
-            <TextInput label="Full Name" placeholder="Enter your full name"/>
+            <TextInput label="User Name" placeholder="Enter your user name"/>
             <TextInput label="Email Address" placeholder="Enter your email address"/>
             <TextInput label="Password" placeholder="Enter your password"/>
             <Button text="Register" />

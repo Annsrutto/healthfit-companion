@@ -3,7 +3,6 @@ import { lightTheme } from './assets/Themes';
 import { BrowserRouter } from 'react-router-dom';
 import Authentication from './pages/Authentication';
 
-
 const Container = styled.div`
   width: 100%;
   height: 100vh;
