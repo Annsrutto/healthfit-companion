@@ -1,9 +1,18 @@
 import bycrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import { registerValidation, loginValidation } from '../utils/validation.js';
 
 export const register = async (req, res, next) => {
 	try {
+		// Validate registration data
+		const { error } = registerValidation(req.body);
+		if (error) {
+			const validationError = new Error(error.details[0].message);
+			validationError.statusCode = 400;
+			return next(validationError);
+		}
+
 		const { username, email, password } = req.body;
 		const existingUser = await User.findOne({ email });
 		if (existingUser) {
@@ -23,6 +32,14 @@ export const register = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
 	try {
+		// Validate login data
+		const { error } = loginValidation(req.body);
+		if (error) {
+			const validationError = new Error(error.details[0].message);
+			validationError.statusCode= 400;
+			return next(validationError);
+		}
+
 		const { email, password } = req.body;
 		const existingUser = await User.findOne({ email });
 		if (!existingUser) {
