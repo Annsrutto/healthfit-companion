@@ -1,50 +1,54 @@
 import Exercise from '../models/Exercise.js'
 
-export const getExercises = async (req, res) => {
+export const getExercises = async (req, res, next) => {
 	try {
 		const exercises = await Exercise.find({ user: req.userId });
 		res.status(200).json(exercises);
 	} catch (error) {
-		res.status(404).json({ message: error.message });
+		next(error);
 	}
 };
 
-export const createExercise = async (req, res) => {
-	const exercise = new Exercise({ ...req.body, user: req.userId });
+export const createExercise = async (req, res, next) => {
 	try {
+		const exercise = new Exercise({ ...req.body, user: req.userId });
 		await exercise.save();
 		res.status(201).json(exercise);
 	} catch (error) {
-		res.status(409).json({ message: error.message });
+		next(error);
 	}
 };
 
-export const updateExercise = async (req, res) => {
-	const { id } = req.params;
+export const updateExercise = async (req, res, next) => {
 	try {
+		const { id } = req.params;
 		const updatedExercise = await Exercise.findOneAndUpdate(
 			{ _id: id, user: req.userId },
 			{ ...req.body },
 			{ new: true}
 		);
 		if (!updatedExercise) {
-			return res.status(404).json({ message: 'Exercise not found' });
+			const error = new Error('Exercise not found!');
+			error.statusCode = 404;
+			return next(error);
 		}
-		res.json(updateExercise);
+		res.json(updatedExercise);
 	} catch (error) {
-		res.status(400).json({ message: error.message});
+		next(error);
 	}
 }
 
-export const deleteExercise = async (req, res) => {
-	const { id } = req.params;
+export const deleteExercise = async (req, res, next) => {
 	try {
+		const { id } = req.params;
 		const deletedExercise = await Exercise.findOneAndDelete({ _id: id, user: req.userId });
 		if (!deletedExercise) {
-			return res.status(404).json({ message: 'Exercise not found' });
+			const error = new Error('Exercise not found!');
+			error.statusCode = 404;
+			return next(error);
 		}
 		res.json({ message: 'Exercise deleted successfully' });
 	} catch (error) {
-		res.status(500).json({ message: error.message });
+		next(error);
 	}
 };

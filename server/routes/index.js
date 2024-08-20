@@ -7,6 +7,6 @@ const router = express.Router;
 
 router.use('/auth', authRoutes);
 router.use('/exercises', exerciseRoutes);
-router.use('./goals', goalRoutes);
+router.use('/goals', goalRoutes);
 
 export default router;
