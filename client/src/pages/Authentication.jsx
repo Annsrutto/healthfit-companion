@@ -75,12 +75,14 @@ const Authentication = () => {
         <Image src={fitImage} />
       </Left>
       <Right>
-        { !login ? <>
+        { !login ? (
+          <>
         <Register />
-        <Text>Don't have an account?<TextButton onClick={() => setLogin(false)} >Register</TextButton></Text></> :
-         <>
+        <Text>Don't have an account?<TextButton onClick={() => setLogin(true)} >Register</TextButton></Text></>
+      ):(
+      <>
          <Login />
-        <Text>Already have an account?<TextButton onClick={() => setLogin(true)} >Login</TextButton></Text></>}
+        <Text>Already have an account?<TextButton onClick={() => setLogin(false)} >Login</TextButton></Text></>)}
       </Right>
     </Container>
   )

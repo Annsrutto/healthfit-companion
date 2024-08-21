@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import TextInput from './TextInput';
 import Button from './Button';
@@ -23,7 +24,7 @@ const Register = () => {
     <Container>
         <div>
             <Title>Create New Account</Title>
-            <Span>Please enter your details here to create new account</Span>
+            <Span>Please enter details to create a new account</Span>
         </div>
         <div style={{
             display: "flex",
@@ -33,7 +34,7 @@ const Register = () => {
         >
             <TextInput label="User Name" placeholder="Enter your user name"/>
             <TextInput label="Email Address" placeholder="Enter your email address"/>
-            <TextInput label="Password" placeholder="Enter your password"/>
+            <TextInput label="Password" placeholder="Enter your password" password/>
             <Button text="Register" />
         </div>
     </Container>

@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import TextInput from './TextInput';
 import Button from './Button';
@@ -32,7 +33,7 @@ const Login = () => {
         }}
         >
             <TextInput label="Email Address" placeholder="Enter your email address"/>
-            <TextInput label="Password" placeholder="Enter your password"/>
+            <TextInput label="Password" placeholder="Enter your password" password/>
             <Button text="Login" />
         </div>
     </Container>
