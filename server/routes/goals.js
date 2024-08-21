@@ -2,7 +2,7 @@ import express from "express";
 import { getGoals, createGoal, updateGoal, deleteGoal } from '../controllers/goalController.js';
 import auth from '../middleware/auth.js';
 
-const router = express.Router;
+const router = express.Router();
 
 router.get('/', auth, getGoals);
 router.post('/', auth, createGoal);
