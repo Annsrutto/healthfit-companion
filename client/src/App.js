@@ -1,9 +1,11 @@
 import { ThemeProvider, styled } from 'styled-components';
 import { lightTheme } from './assets/Themes';
 import { useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Authentication from './pages/Authentication';
 import Navbar from './components/Navbar';
+import Dashboard from './pages/Dashboard';
+import Exercises from './pages/Exercises';
 
 const Container = styled.div`
   width: 100%;
@@ -25,6 +27,10 @@ const App = () => {
       { user ? (
         <Container>
           <Navbar />
+          <Routes>
+            <Route path="/" exact element={<Dashboard />} />
+            <Route path="/exercises" exact element={<Exercises />} />
+          </Routes>
         </Container>
       ) : (
       <Container>

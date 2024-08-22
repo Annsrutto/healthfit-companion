@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link as LinkR, NavLink} from 'react-router-dom';
 import logo from '../assets/Images/Logo.png';
 import { MenuRounded } from '@mui/icons-material';
+import { Avatar } from '@mui/material';
 
 const Nav = styled.div`
     background-color: ${({ theme }) => theme.bg};
@@ -84,25 +85,82 @@ const Navlink = styled(NavLink)`
     }
 `;
 
+const UserContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    align-items: center;
+    padding: 0 6px;
+    color: ${({ theme }) => theme.primary}
+`;
+
+const TextButton = styled.div`
+    text-align: end;
+    color: ${({ theme }) => theme.secondary};
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    &:hover {
+        color: ${({ theme }) => theme.primary};
+    }
+`;
+
+const MobileMenu = styled.ul`
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 16px;
+    padding: 0 6px;
+    list-style: none;
+    width: 90%;
+    padding: 12px 40px 24px 40px;
+    background: ${({ theme }) => theme.bg};
+    position: absolute;
+    top: 80px;
+    right: 0;
+    transition: all 0.6s ease-in-out;
+    transform: ${({ isOpen }) => isOpen ? "translateY(0)" : "translateY(-100%)"};
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    opacity: ${({ isOpen }) => (isOpen ? "100%" : "0")};
+    z-index: ${({ isOpen }) => (isOpen ? "1000" : "-1000")};
+`;
 
 const Navbar = () => {
+    const [isOpen, setisOpen] = useState(false);
   return (
     <Nav>
         <NavContainer>
-            <Mobileicon>
+            <Mobileicon onClick={() => setisOpen(!isOpen)}>
                 <MenuRounded sx={{ color: "inherit" }} />
             </Mobileicon>
+
             <NavLogo to='/'>
             <Logo src={logo} />
                 AfyaFiti
             </NavLogo>
+            
+            <MobileMenu isOpen={ isOpen }>
+                <Navlink to="/">Dashboard</Navlink>
+                <Navlink to="/">Workouts</Navlink>
+                <Navlink to="/">Goals</Navlink>
+                <Navlink to="/">Contact</Navlink>
+            </MobileMenu>
+
             <NavItems>
                 <Navlink to="/">Dashboard</Navlink>
                 <Navlink to="/">Workouts</Navlink>
                 <Navlink to="/">Goals</Navlink>
-                <Navlink to="/">Tutorials</Navlink>
                 <Navlink to="/">Contact</Navlink>
             </NavItems>
+
+            <UserContainer>
+                <Avatar />
+                <TextButton>Logout</TextButton>
+            </UserContainer>
         </NavContainer>
     </Nav>
   )
