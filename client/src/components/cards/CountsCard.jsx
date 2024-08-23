@@ -86,19 +86,19 @@ const Description = styled.div`
     }
 `;
 
-const CountsCard = ({ item }) => {
+const CountsCard = ({ item, data }) => {
   return (
     <Card>
       <Left>
         <Title>{item.name}</Title>
         <Value>
-          1200
+          {data && data[item.key].toFixed(2)}
           <Unit>{item.unit}</Unit>
           <Span positive>(+10%)</Span>
         </Value>
         <Description>{item.desc}</Description>
       </Left>
-      <Icon color={item.color} bg={item.lightColor}  >{ item.icon }</Icon>
+      <Icon color={item.color} bg={item.lightColor} >{ item.icon }</Icon>
     </Card>
   )
 }

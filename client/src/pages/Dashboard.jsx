@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { counts } from '../assets/Data';
 import CountsCard from '../components/cards/CountsCard';
+import WeeklyStatCard from '../components/cards/WeeklyStatCard';
+import ChartStatCard from '../components/cards/ChartStatCard';
+import AddExercise from '../components/AddExercise';
 
 const Container = styled.div`
     flex: 1;
@@ -14,7 +17,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
     flex: 1;
-    max-width: 1400px;
+    max-width: 1600px;
     display: flex;
     flex-direction: column;
     gap: 22px;
@@ -32,7 +35,7 @@ const Title = styled.div`
 
 const FlexWrap = styled.div`
     display: flex;
-    flex-wrap; wrap;
+    flex-wrap: wrap;
     justify-content: space-between;
     gap: 22px;
     padding: 0px 16px;
@@ -41,17 +44,52 @@ const FlexWrap = styled.div`
     }
 `;
 
-
-
 const Dashboard = () => {
+    const [workout, setWorkout] = useState();
+    const data = {
+        totalCaloriesBurned: 7500,
+        totalWorkouts: 5,
+        avgCaloriesBurnedPerWorkout: 1500,
+        totalWeeksCaloriesBurned: {
+            weeks: ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th"],
+            caloriesBurned: [1500, 0, 2500, 0, 2500, 0, 7500]
+        },
+        pieChartData: [
+            {
+                id: 1,
+                value: 1500,
+                label: "Legs",
+            },
+            {
+                id: 2,
+                value: 3750,
+                label: "Shoulders & Back",
+            },
+            {
+                id: 3,
+                value: 2250,
+                label: "Abs",
+            },
+            {
+                id: 4,
+                value: 1750,
+                label: "Glutes",
+            }
+        ]
+    }
   return (
     <Container>
         <Wrapper>
             <Title>Dashboard</Title>
             <FlexWrap>
                 {counts.map((item) => (
-                    <CountsCard item={ item } />
+                    <CountsCard item={ item } data={data}/>
                 ))}
+            </FlexWrap>
+            <FlexWrap>
+                <WeeklyStatCard data={data} />
+                <ChartStatCard data={data} />
+                <AddExercise workout={workout} setWorkout={setWorkout} />
             </FlexWrap>
         </Wrapper>
     </Container>
@@ -59,4 +97,3 @@ const Dashboard = () => {
 }
 
 export default Dashboard;
-
