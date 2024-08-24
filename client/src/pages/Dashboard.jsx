@@ -5,6 +5,7 @@ import CountsCard from '../components/cards/CountsCard';
 import WeeklyStatCard from '../components/cards/WeeklyStatCard';
 import ChartStatCard from '../components/cards/ChartStatCard';
 import AddExercise from '../components/AddExercise';
+import ExercisesCard from '../components/cards/ExercisesCard';
 
 const Container = styled.div`
     flex: 1;
@@ -39,6 +40,27 @@ const FlexWrap = styled.div`
     justify-content: space-between;
     gap: 22px;
     padding: 0px 16px;
+    @media (max-width: 600px) {
+        gap: 12px;
+    }
+`;
+
+const Section = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 0px 16px;
+    gap: 22px;
+    @media (max-width: 600px) {
+        gap: 12px;
+    }
+`;
+
+const CardWrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 100px;
     @media (max-width: 600px) {
         gap: 12px;
     }
@@ -91,6 +113,15 @@ const Dashboard = () => {
                 <ChartStatCard data={data} />
                 <AddExercise workout={workout} setWorkout={setWorkout} />
             </FlexWrap>
+            <Section>
+                <Title>Today's Workouts</Title>
+                <CardWrapper>
+                    <ExercisesCard />
+                    <ExercisesCard />
+                    <ExercisesCard />
+                    <ExercisesCard />
+                </CardWrapper>
+            </Section>
         </Wrapper>
     </Container>
   )

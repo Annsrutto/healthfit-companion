@@ -32,7 +32,7 @@ const App = () => {
             <Route path="/exercises" exact element={<Exercises />} />
           </Routes>
         </Container>
-      ) : (
+        ) : (
       <Container>
         <Authentication />
       </Container>

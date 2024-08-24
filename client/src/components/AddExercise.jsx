@@ -10,6 +10,7 @@ const Card = styled.div`
     border: 1px solid ${({ theme }) => theme.text_primary + 20};
     border-radius: 14px;
     display: flex;
+    flex-direction: column;
     gap: 6px;
     box-shadow: 1px 6px 20px 0px ${({ theme }) => theme.text_primary + 15};
     @media (max-width: 600px) {
@@ -45,7 +46,10 @@ const AddExercise = ({ workout, setWorkout}) => {
 - Duration
             `}
       />
-      <Button text='Add Workout' small/>
+      <Button 
+        text='Add Workout' 
+        small
+      />
     </Card>
   )
 }
