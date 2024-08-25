@@ -52,6 +52,7 @@ This is the backend server for the HealthFit Companion application. It provides 
 1. Clone the repository
 2. Install dependencies: `npm install`
 3. Set up environment variables in a `.env` file:
+
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
