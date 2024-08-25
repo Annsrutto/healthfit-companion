@@ -3,7 +3,7 @@ import authRoutes from './auth.js';
 import exerciseRoutes from './exercises.js';
 import goalRoutes from './goals.js';
 
-const router = express.Router;
+const router = express.Router();
 
 router.use('/auth', authRoutes);
 router.use('/exercises', exerciseRoutes);
