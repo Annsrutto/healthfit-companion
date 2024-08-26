@@ -25,7 +25,7 @@ const App = () => {
   return (
     <ThemeProvider theme={ lightTheme }>
       <BrowserRouter>
-      { currentUser ? (
+      { !currentUser ? (
         <Container>
           <Navbar currentUser={currentUser} />
           <Routes>
