@@ -20,6 +20,11 @@ app.use(cors({
   }));
 app.use(errorHandler);
 
+// Default route
+app.get('/api', (req, res) => {
+	res.send('Welcome to the AfyaFit API');
+  });
+
 // Route setup
 app.use('/api/auth', authRoutes);
 app.use('/api/exercises', exerciseRoutes);
