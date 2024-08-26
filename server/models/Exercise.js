@@ -33,16 +33,16 @@ const exerciseSchema = new mongoose.Schema({
 	caloriesBurned: {
 		type: Number,
 	},
+	notes: {
+		type: String,
+		trim: true
+	},
 	date: {
 		type:Date,
 		required: true,
 		default: Date.now
-	},
-	notes: {
-		type: String,
-		trim: true
 	}
-});
+}, { timestamps: true });
 
 const Exercise = mongoose.model('Exercise', exerciseSchema);
 
