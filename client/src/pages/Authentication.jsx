@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import logo from '../assets/Images/afyaFitLogo.png';
-import fitImage from "../assets/Images/Fitness.jpg";
+import logo from '../assets/Images/Logo.png';
+import fitImage from "../assets/Images/FitImg.jpg";
 import { useState } from 'react';
 import Register from '../components/Register';
 import Login from '../components/Login';
@@ -16,8 +16,9 @@ const Container = styled.div`
 `;
 const Left = styled.div`
     flex: 1;
-    background: white;
+    background: transparent;
     position: relative;
+    align-items: center;
     @media (max-width: 700px) {
         display: none;
     }
@@ -28,7 +29,7 @@ const Logo = styled.img`
     width: 100px;
     top: 40px;
     left: 60px;
-    z-index: 10
+    z-index: 10;
 `;
 
 const Image = styled.img`

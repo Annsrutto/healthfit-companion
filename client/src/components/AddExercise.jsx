@@ -27,7 +27,7 @@ const Title = styled.div`
     }
 `;
 
-const AddExercise = ({ workout, setWorkout}) => {
+const AddExercise = ({ workout, setWorkout, addNewExercise, buttonLoading}) => {
   return (
     <Card>
       <Title>Add New Workout</Title>
@@ -49,6 +49,9 @@ const AddExercise = ({ workout, setWorkout}) => {
       <Button 
         text='Add Workout' 
         small
+        onClick={() => addNewExercise()}
+        isLoading={buttonLoading}
+        isDisabled={buttonLoading}
       />
     </Card>
   )

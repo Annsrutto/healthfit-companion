@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { counts } from '../assets/Data';
 import CountsCard from '../components/cards/CountsCard';
@@ -6,6 +6,7 @@ import WeeklyStatCard from '../components/cards/WeeklyStatCard';
 import ChartStatCard from '../components/cards/ChartStatCard';
 import AddExercise from '../components/AddExercise';
 import ExercisesCard from '../components/cards/ExercisesCard';
+import { getDashboardDetails, getExercises, addWorkouts } from '../api';
 
 const Container = styled.div`
     flex: 1;
@@ -67,38 +68,55 @@ const CardWrapper = styled.div`
 `;
 
 const Dashboard = () => {
-    const [workout, setWorkout] = useState();
-    const data = {
-        totalCaloriesBurned: 7500,
-        totalWorkouts: 5,
-        avgCaloriesBurnedPerWorkout: 1500,
-        totalWeeksCaloriesBurned: {
-            weeks: ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th"],
-            caloriesBurned: [1500, 0, 2500, 0, 2500, 0, 7500]
-        },
-        pieChartData: [
-            {
-                id: 1,
-                value: 1500,
-                label: "Legs",
-            },
-            {
-                id: 2,
-                value: 3750,
-                label: "Shoulders & Back",
-            },
-            {
-                id: 3,
-                value: 2250,
-                label: "Abs",
-            },
-            {
-                id: 4,
-                value: 1750,
-                label: "Glutes",
-            }
-        ]
-    }
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState();
+    const [buttonLoading, setButtonLoading] = useState(false);
+    const [todaysWorkouts, setTodaysWorkouts] = useState([]);
+    const [workout, setWorkout] = useState(`#Legs
+        - Sumo Squats
+        - 5 sets x 15 reps
+        - 30kg
+        - 10 min     
+        `);
+
+const dashboardData = async () => {
+    setLoading(true);
+    const token = localStorage.getItem("afyaFit-app-token");
+    await getDashboardDetails(token).then((res) => {
+        setData(res.data);
+        console.log(res.data);
+        setLoading(false);
+    });
+};
+
+const getTodaysExercises = async () => {
+    setLoading(true);
+    const token = localStorage.getItem("afyaFit-app-token");
+    await getExercises(token, "").then((res) => {
+        setTodaysWorkouts(res?.data?.todaysWorkouts);
+        console.log(res.data);
+        setLoading(false);
+    });
+};
+
+const addNewExercise = async () => {
+    setButtonLoading(true);
+    const token = localStorage.getItem("afyaFit-app-token");
+    await addWorkouts(token, { workoutString: workout }).then((res) => {
+        dashboardData();
+        getTodaysExercises();
+        setButtonLoading(false);
+    })
+    .catch((err) => {
+        alert(err);
+    });
+};
+
+useEffect(() => {
+    dashboardData();
+    getTodaysExercises();
+}, []);
+
   return (
     <Container>
         <Wrapper>
@@ -111,15 +129,19 @@ const Dashboard = () => {
             <FlexWrap>
                 <WeeklyStatCard data={data} />
                 <ChartStatCard data={data} />
-                <AddExercise workout={workout} setWorkout={setWorkout} />
+                <AddExercise
+                 workout={workout} 
+                 setWorkout={setWorkout} 
+                 addNewExercise={addNewExercise}
+                 buttonLoading={buttonLoading}
+                />
             </FlexWrap>
             <Section>
                 <Title>Today's Workouts</Title>
                 <CardWrapper>
-                    <ExercisesCard />
-                    <ExercisesCard />
-                    <ExercisesCard />
-                    <ExercisesCard />
+                    {todaysWorkouts.map((workout) => (
+                        <ExercisesCard workout={workout} />
+                    ))}
                 </CardWrapper>
             </Section>
         </Wrapper>
