@@ -1,5 +1,10 @@
 import express from "express";
-import { getExercises, createExercise, updateExercise, deleteExercise } from '../controllers/exerciseController.js';
+import {
+	getExercises,
+	createExercise,
+	updateExercise,
+	deleteExercise,
+  } from '../controllers/exerciseController.js';
 import auth from '../middleware/auth.js';
 
 const router = express.Router();

@@ -18,3 +18,19 @@ export const loginValidation = (data) => {
 
 	return schema.validate(data);
 }
+
+export const exerciseValidation = (data) => {
+    const schema = Joi.object({
+        name: Joi.string().required().trim(),
+        type: Joi.string().required().valid('cardio', 'strength', 'flexibility', 'balance'),
+        duration: Joi.number().required().min(1),
+        sets: Joi.number(),
+        reps: Joi.number(),
+        weight: Joi.number(),
+        caloriesBurned: Joi.number(),
+        date: Joi.date(),
+        notes: Joi.string().trim()
+    });
+
+    return schema.validate(data);
+};
