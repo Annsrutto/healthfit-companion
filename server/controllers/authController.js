@@ -54,7 +54,7 @@ export const login = async (req, res, next) => {
 		const isPasswordCorrect = await bycrypt.compare(password, existingUser.password);
 		if (!isPasswordCorrect) {
 			const error = new Error('Invalid credentials!');
-			errorHandler.statusCode = 400;
+			error.statusCode = 400;
 			return next(error);
 		}
 		const token = jwt.sign({ id:existingUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
