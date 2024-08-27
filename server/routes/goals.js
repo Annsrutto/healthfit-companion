@@ -5,7 +5,7 @@ import auth from '../middleware/auth.js';
 const router = express.Router();
 
 router.get('/', auth, getGoals);
-router.post('/', auth, createGoal);
+router.post('/add', auth, createGoal);
 router.patch('/:id', auth, updateGoal);
 router.delete('/:id', auth, deleteGoal);
 
