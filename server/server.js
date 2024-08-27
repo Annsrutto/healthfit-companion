@@ -21,8 +21,10 @@ app.use(cors({
 app.use(errorHandler);
 
 // Default route
-app.get('/api', (req, res) => {
-	res.send('Welcome to the AfyaFit API');
+app.get('/api', async(req, res) => {
+	res.status(200).json({
+		message: 'Welcome to the AfyaFit API',
+	});
   });
 
 // Route setup
