@@ -18,7 +18,7 @@ export const register = async (req, res, next) => {
 		}
 
 		const { username, email, password } = req.body;
-		const existingUser = await User.findOne({ email });
+		const existingUser = await User.findOne({ email }).exec();
 		if (existingUser) {
 			const error = new Error('User already exists!');
 			error.statusCode = 400;
@@ -30,7 +30,8 @@ export const register = async (req, res, next) => {
 		const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 		res.status(201).json({ result: newUser, token });
 	} catch (error) {
-		next(error);
+		console.error('Registration error:', error);
+		res.status(500).json({ error: error.message || 'An unexpected error occurred' });
 	}
 };
 
@@ -272,8 +273,8 @@ export const getUserDashboard = async (req, res, next) => {
 	  });
   
 	  // Calculate calories burnt for each exercise
-	  await parsedExercises.forEach(async (workout) => {
-		exercise.caloriesBurned = parseFloat(calculateCaloriesBurnt(exercise));
+	  await parsedExercises.forEach(async (exercise) => {
+		exercise.caloriesBurned = parseFloat(calculateCaloriesBurned(exercise));
 		await Exercise.create({ ...exercise, user: userId });
 	  });
   
