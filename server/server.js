@@ -14,15 +14,17 @@ const app = express();
 // Middleware setup and error handling
 app.use(express.json());
 app.use(cors({
-	origin: 'http://localhost:3000',
+	origin: process.env.CLIENT_URL || 'http://localhost:3000',
 	methods: 'GET,POST,PUT,DELETE',
 	allowedHeaders: 'Content-Type,Authorization'
   }));
 app.use(errorHandler);
 
 // Default route
-app.get('/api', (req, res) => {
-	res.send('Welcome to the AfyaFit API');
+app.get('/api', async(req, res) => {
+	res.status(200).json({
+		message: 'Welcome to the AfyaFit API',
+	});
   });
 
 // Route setup
