@@ -1,24 +1,23 @@
-import axios from 'axios';
+import axios from "axios";
 
 const API = axios.create({
-    baseURL: "https://afyafit.onrender.com/api",
+  baseURL: "http://localhost:8080/api",
 });
 
-export const userRegister = async ( data ) => API.post("/auth/register" , data);
-export const userLogin = async ( data ) => API.post("/auth/login" , data);
+export const UserSignUp = async (data) => API.post("/user/signup", data);
+export const UserSignIn = async (data) => API.post("/user/signin", data);
 
-export const getDashboardDetails = async ( token ) => 
-    API.get("/dashboard" , {
-        headers: { Authorization: `Bearer ${token}` },
-});
+export const getDashboardDetails = async (token) =>
+  API.get("/user/dashboard", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
-export const getExercises = async ( token, date ) => 
-    await API.get(`/exercises${date}` , {
-        headers: { Authorization: `Bearer ${token}` },
-});
+export const getWorkouts = async (token, date) =>
+  await API.get(`/user/workout${date}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
-export const addWorkouts = async ( token, data ) => 
-    await API.post(`/exercises`, data, {
-        headers: { Authorization: `Bearer ${token}` },
-});
-
+export const addWorkout = async (token, data) =>
+  await API.post(`/user/workout`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });

@@ -1,103 +1,120 @@
-import styled from 'styled-components';
-import logo from '../assets/Images/Logo.png'; // Assuming your logo image is here
-import fitImage from "../assets/Images/FitImg.jpg";
-import { useState } from 'react';
-import Register from '../components/Register';
-import Login from '../components/Login';
+import React, { useState } from "react";
+import styled from "styled-components";
+import LogoImage from "../utils/Images/Logo.png";
+import AuthImage from "../utils/Images/AuthImage.jpg";
+import SignIn from "../components/SignIn";
+import SignUp from "../components/SignUp";
 
 const Container = styled.div`
-    flex: 1;
-    height: 100%;
-    display: flex;
-    background: ${({ theme }) => theme.bg};
-    @media (max-width: 700px) {
-        flex-direction: column;
-    }
+  flex: 1;
+  height: 100%;
+  display: flex;
+  background: ${({ theme }) => theme.bg};
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
-
 const Left = styled.div`
-    flex: 1;
-    background-image: url(${fitImage});
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    display: flex;
-    align-items: center;  /* Align logo and text vertically */
-    @media (max-width: 700px) {
-        display: none;
-    }
+  flex: 1;
+  position: relative;
+  @media (max-width: 700px) {
+    display: none;
+  }
 `;
-
 const Logo = styled.img`
-    position: absolute;
-    width: 70px;
-    top: 40px;
-    left: 20px;
-    height: 100px;
-    margin-right: 5px;
-    -webkit-mask-image: url(${logo});
-    mask-image: url(${logo});
+  position: absolute;
+  width: 70px;
+  top: 40px;
+  left: 20px;
+  z-index: 10;
+`;
+const Image = styled.img`
+  position: relative;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 `;
 
 const AfyaFitText = styled.span`
     position: absolute;
     width: 70px;
-    top: 40px;
+    top: 20px;
     left: 100px;
     font-size: 40px;
     font-weight: 600;
-    color: ${({ theme }) => theme.white};
+    color: green;
+`;
+
+const AfyaFitSlogan = styled.span`
+    position: absolute;
+    width: 70px;
+    top: 80px;
+    left: 100px;
+    right: 40px;
+    bottom: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    color: green;
 `;
 
 const Right = styled.div`
-    flex: 1;
-    background-color: white;  /* Keep the right side white */
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
-    gap: 16px;
-    align-items: center;
-    justify-content: center;
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Text = styled.div`
-    font-size: 16px;
-    text-align: center;
-    color: ${({ theme }) => theme.text_secondary};
-    margin-top: 16px;
-    @media (max-width: 400px) {
-        font-size: 14px; 
-    }
+  font-size: 16px;
+  text-align: center;
+  color: ${({ theme }) => theme.text_secondary};
+  margin-top: 16px;
+  @media (max-width: 400px) {
+    font-size: 14px;
+  }
 `;
-
 const TextButton = styled.span`
-color: ${({ theme }) => theme.primary};
-cursor: pointer;
-font-weight: 600;
-transition: all 0.3s ease;
+  color: ${({ theme }) => theme.primary};
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
 `;
 
 const Authentication = () => {
-    const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(false);
   return (
     <Container>
       <Left>
-        <Logo src={logo} />
-        <AfyaFitText>AfyaFit</AfyaFitText>
+        <Logo src={LogoImage} />
+        <Image src={AuthImage} />
+        <AfyaFitText>AfyaFiti</AfyaFitText>
+        <AfyaFitSlogan>Health & Fitness</AfyaFitSlogan>
       </Left>
       <Right>
-        { !login ? (
+        {!login ? (
           <>
-        <Register />
-        <Text>Don't have an account?<TextButton onClick={() => setLogin(true)} >Register</TextButton></Text></>
-      ):(
-      <>
-         <Login />
-        <Text>Already have an account?<TextButton onClick={() => setLogin(false)} >Login</TextButton></Text></>)}
+            <SignIn />
+            <Text>
+              Don't have an account?{" "}
+              <TextButton onClick={() => setLogin(true)}>Register</TextButton>
+            </Text>
+          </>
+        ) : (
+          <>
+            <SignUp />
+            <Text>
+              Already have an account?{" "}
+              <TextButton onClick={() => setLogin(false)}>Login</TextButton>
+            </Text>
+          </>
+        )}
       </Right>
     </Container>
-  )
-}
+  );
+};
 
 export default Authentication;

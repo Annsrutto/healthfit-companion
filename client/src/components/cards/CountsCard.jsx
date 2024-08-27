@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Card = styled.div`
   flex: 1;
@@ -9,9 +9,8 @@ const Card = styled.div`
   border-radius: 14px;
   display: flex;
   gap: 6px;
-  box-shadow: 1px 6px 20px 0px ${({ theme }) => theme.text_primary + 15};
+  box-shadow: 1px 6px 20px 0px ${({ theme }) => theme.primary + 15};
 `;
-
 const Left = styled.div`
   flex: 1;
   display: flex;
@@ -21,19 +20,17 @@ const Left = styled.div`
     gap: 6px;
   }
 `;
-
 const Title = styled.div`
-  font-size: 16px;
   font-weight: 600;
+  font-size: 16px;
   color: ${({ theme }) => theme.primary};
   @media (max-width: 600px) {
     font-size: 14px;
   }
 `;
-
 const Value = styled.div`
-  font-size: 32px;
   font-weight: 600;
+  font-size: 32px;
   display: flex;
   align-items: end;
   gap: 8px;
@@ -42,12 +39,10 @@ const Value = styled.div`
     font-size: 22px;
   }
 `;
-
 const Unit = styled.div`
   font-size: 14px;
   margin-bottom: 8px;
 `;
-
 const Span = styled.div`
   margin-bottom: 8px;
   font-weight: 500;
@@ -55,35 +50,34 @@ const Span = styled.div`
   @media (max-width: 600px) {
     font-size: 12px;
   }
-    ${({ positive, theme }) => 
-      positive 
-    ? 
-    `color: ${ theme.green };`
-    : 
-    `color: ${ theme.red };`
-    }
-`;
 
+  ${({ positive, theme }) =>
+    positive
+      ? `
+  color: ${theme.green};`
+      : `
+  color: ${theme.red};`}
+`;
 const Icon = styled.div`
-    height: fit-content;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    ${({ color, bg }) => `
-      background: ${bg};
-      color: ${color};
-    `}
+  height: fit-content;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  ${({ color, bg }) => `
+  background: ${bg};
+  color: ${color};
+  `}
 `;
 
-const Description = styled.div`
-    font-size: 14px;
-    color: ${({ theme }) => theme.text_secondary};
-    margin-bottom: 6px;
-    @media (max-width: 600px) {
-      font-size: 12px;
-    }
+const Desc = styled.div`
+  font-size: 14px;
+  color: ${({ theme }) => theme.text_secondary + 90};
+  margin-bottom: 6px;
+  @media (max-width: 600px) {
+    font-size: 12px;
+  }
 `;
 
 const CountsCard = ({ item, data }) => {
@@ -96,11 +90,13 @@ const CountsCard = ({ item, data }) => {
           <Unit>{item.unit}</Unit>
           <Span positive>(+10%)</Span>
         </Value>
-        <Description>{item.desc}</Description>
+        <Desc>{item.desc}</Desc>
       </Left>
-      <Icon color={item.color} bg={item.lightColor} >{ item.icon }</Icon>
+      <Icon color={item.color} bg={item.lightColor}>
+        {item.icon}
+      </Icon>
     </Card>
-  )
-}
+  );
+};
 
 export default CountsCard;
