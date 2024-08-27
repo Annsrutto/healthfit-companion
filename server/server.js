@@ -13,6 +13,7 @@ const app = express();
 
 // Middleware setup and error handling
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors({
 	origin: process.env.CLIENT_URL || 'http://localhost:3000',
 	methods: 'GET,POST,PUT,DELETE',
