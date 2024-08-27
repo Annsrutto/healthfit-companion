@@ -130,7 +130,7 @@ useEffect(() => {
                 <WeeklyStatCard data={data} />
                 <ChartStatCard data={data} />
                 <AddExercise
-                 workout={workout} 
+                 workout={workout}
                  setWorkout={setWorkout} 
                  addNewExercise={addNewExercise}
                  buttonLoading={buttonLoading}
